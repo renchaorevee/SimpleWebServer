@@ -2,6 +2,7 @@ __author__ = 'renchaorevee'
 
 import SocketServer
 import os
+import urllib
 
 serverRoot = os.getcwd()
 
@@ -127,7 +128,7 @@ class MyServerHandler(SocketServer.BaseRequestHandler):
 
 				# only support GET so far
 				if myRequestHeader['method'].upper() == "GET":
-					myRequestHeader['resource'] = firstLine[1]
+					myRequestHeader['resource'] = urllib.url2pathname(firstLine[1])
 					myRequestHeader['version'] = firstLine[2]
 
 					# first line has already been parsed, these headers isn't used so far
